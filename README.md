@@ -1,0 +1,1 @@
+# wordpress-theme-canarinho-mudancas
