@@ -1,0 +1,601 @@
+       /* --- Regra de Ouro: Garante que o layout não quebre com padding --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* ESSENCIAL para o cálculo correto da largura */
+        }
+        
+        /* ==================================================== */
+        /* ESTILOS GLOBAIS E VARIÁVEIS                 */
+        /* ==================================================== */
+        :root {
+            --cor-principal: #002742;
+            --cor-secundaria: #d92e21;
+            --cor-destaque: #fbbe24;
+            --cor-texto-claro: #fff;
+            --cor-texto-escuro: #333;
+            --cor-texto-suave: #555;
+            --cor-fundo-claro: #f4f4f4;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--cor-texto-claro);
+            color: var(--cor-texto-escuro);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--cor-principal);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 20px;
+        }
+
+        section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 0; /* Remove a margem superior padrão */
+    margin-bottom: 50px; /* Define uma margem inferior padrão e generosa */
+    color: var(--cor-principal);
+}
+
+        a, button {
+            transition: all 0.3s ease;
+        }
+
+        /* ==================================================== */
+        /* HEADER E NAVBAR                 */
+        /* ==================================================== */
+        .main-header {
+            background-color: var(--cor-principal);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box; 
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: #001524;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .nav-menu.active {
+            display: flex;
+        }
+
+        .nav-menu li a {
+            color: var(--cor-texto-claro);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 15px;
+            display: block;
+        }
+
+        .nav-menu li a:hover {
+            background-color: #003a61;
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .menu-toggle .bar {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--cor-texto-claro);
+            border-radius: 2px;
+        }
+
+        /* ==================================================== */
+        /* HERO BANNER                    */
+        /* ==================================================== */
+        .hero {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    padding: 60px 20px;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    position: relative; /* Essencial para posicionar os elementos gráficos */
+    overflow: hidden; /* Garante que as formas não causem scroll */
+    padding-bottom: 120px; /* Aumenta o espaço inferior para a curva "respirar" */
+}
+
+/* Elemento gráfico amarelo no canto inferior esquerdo */
+.hero::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    bottom: -20vw;
+    left: -20vw;
+    width: 50vw;
+    height: 50vw;
+    background-color: var(--cor-secundaria);
+    border-radius: 50%;
+    opacity: 0.9;
+}
+
+/* Elemento gráfico azul mais escuro no canto superior direito */
+.hero::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: -25vw;
+    right: -25vw;
+    width: 60vw;
+    height: 60vw;
+    background-color: #fbbe24; /* Um tom um pouco mais escuro que o principal */
+    border-radius: 50%;
+
+}
+
+
+
+.hero-container {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative; /* Para ficar acima dos elementos gráficos */
+    z-index: 2;
+    grid-template-areas:
+        "title"
+        "image"
+        "subtitle"
+        "button";
+    text-align: center;
+}
+
+/* Estilos da tipografia e botão */
+.hero-container h1 {
+    grid-area: title;
+    font-size: clamp(2rem, 6vw, 4rem); /* Fonte responsiva */
+    line-height: 1.1;
+    font-weight: 700;
+    margin: 0;
+    color: var(--cor-texto-claro);
+    letter-spacing: 10px;  /* <<< O valor principal a ser ajustado. Aumente para mais espaço. */
+  text-transform: uppercase; /* Opcional: Fica melhor em maiúsculas. */
+  text-align: none;      /* Opcional: Geralmente usado com texto centralizado. */
+  width: 100%;             /* Garante que o texto se alinhe em relação à largura total. */
+}
+
+.hero-container p {
+    grid-area: subtitle;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    /* max-width: 450px; */
+    justify-self: center;
+    margin: 10px 0 20px 0;
+}
+
+.hero-container .cta-button {
+    grid-area: button;
+    justify-self: center;
+}
+
+/* Estilos da imagem */
+.hero-image-item {
+    grid-area: image;
+    max-width: 100%;
+    width: 320px;
+    height: auto;
+    border-radius: 10px;
+    justify-self: center;
+}
+
+/* --- Layout para Tablet e Desktop (a partir de 992px) --- */
+@media (min-width: 992px) {
+    .hero-container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "title    image"
+            "subtitle image"
+            "button   image"
+            ".        image";
+        text-align: left;
+        gap: 60px;
+    }
+
+    .hero-container p {
+        justify-self: start;
+        margin: 20px 0 30px 0;
+    }
+    
+    .hero-container .cta-button {
+        justify-self: start;
+    }
+
+    .hero-image-item {
+        width: 100%;
+        max-width: 500px;
+        justify-self: center;
+    }
+
+    
+}
+        
+        .cta-button {
+            background-color: var(--cor-destaque);
+            color: #002742;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .cta-button:hover {
+            background-color: #fbbe24;
+            transform: scale(1.05);
+        }
+
+        /* ==================================================== */
+        /* SEÇÕES DE CONTEÚDO                   */
+        /* ==================================================== */
+        
+
+        /* --- Depoimentos --- */
+        .testimonials { background-color: var(--cor-fundo-claro); }
+        .testimonials h2 { text-align: center; font-size: 2.5rem; margin-bottom: 40px; }
+        .testimonials-container { display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .testimonial-card { display: flex; align-items: flex-start; gap: 20px; background-color: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); width: 100%; max-width: 650px; }
+        .testimonial-avatar .fas { font-size: 4rem; color: var(--cor-secundaria); cursor: pointer;}
+        .testimonial-content { display: flex; flex-direction: column; width: 100%; }
+        .testimonial-text { font-size: 1.1rem; font-style: italic; color: var(--cor-texto-escuro); line-height: 1.6; margin: 0 0 15px 0; border-left: 3px solid var(--cor-destaque); padding-left: 15px; }
+        .testimonial-footer { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .author-name { font-weight: bold; color: var(--cor-principal); }
+        .star-rating .fas { color: var(--cor-destaque); font-size: 1rem; }
+
+        /* --- Formulário de Contato --- */
+        .contact-form { background-color: var(--cor-fundo-claro); }
+        .contact-form h2 { text-align: center; font-size: 2.5rem; color: var(--cor-principal); margin-bottom: 30px; }
+        .form-container { max-width: 700px; margin: 0 auto; }
+        .contact-form input, .contact-form textarea, .contact-form button { width: 100%; padding: 15px; margin-bottom: 15px; font-size: 1rem; border-radius: 5px; border: none; box-sizing: border-box; }
+        .contact-form textarea { resize: vertical; }
+        .contact-form button { background-color: var(--cor-destaque); color: var(--cor-principal); font-weight: bold; cursor: pointer; }
+        .contact-form button:hover { background-color: #eab014; }
+
+        /* --- Serviços --- */
+        .services h2 { text-align: center; font-size: 2.5rem; margin-bottom: 40px; }
+        .services-container { max-width: 800px; margin: 0 auto; }
+        .service-item { display: flex; align-items: flex-start; margin-bottom: 30px; padding: 15px;
+    border-radius: 8px; transition: background-color 0.3s ease, transform 0.3s ease;}
+    .service-item:hover { background-color: #f9f9f9; /* Um fundo quase branco para destacar */
+    transform: translateX(10px); /* Desliza levemente para a direita */}
+        .service-icon { margin-right: 20px; }
+        .service-icon .fas { font-size: 2rem; color: var(--cor-secundaria); margin-top: 5px; }
+        .service-text h3 { margin-top: 0; margin-bottom: 8px; font-size: 1.5rem; }
+        .service-text p { margin: 0; font-size: 1.125rem; color: var(--cor-texto-suave); line-height: 1.6; }
+
+        /* --- Como Funciona --- */
+        .how-it-works { background-color: var(--cor-fundo-claro); }
+        .how-it-works h2 { text-align: center; font-size: 2.5rem; margin-bottom: 40px; }
+        .steps-container { display: flex; flex-direction: column; gap: 20px; }
+        .step-card { background-color: #fff; border-radius: 8px; padding: 25px; display: flex; align-items: flex-start; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .step-card:hover { transform: translateY(-5px); }
+        .step-number { font-size: 2.5rem; font-weight: bold; color: var(--cor-secundaria); margin-right: 20px; line-height: 1; }
+        .step-content h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.3rem; }
+        .step-content p { font-size: 1.125rem; margin: 0; line-height: 1.6; }
+
+        /* --- Por que nos escolher --- */
+        .why-choose-us h2 { text-align: center; font-size: 2.5rem; margin-bottom: 40px; }
+        .why-choose-us-content { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+        .logo-column img { max-width: 250px; height: auto; margin-bottom: 20px; }
+        .feature-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
+        .feature-item .fas { font-size: 1.4rem; color: var(--cor-destaque); margin-top: 4px; }
+        .feature-item p { font-size: 1.125rem; margin: 0; line-height: 1.6; color: var(--cor-texto-suave); }
+        .feature-item p strong { color: var(--cor-principal); }
+        
+        /* ==================================================== */
+        /* FOOTER                         */
+        /* ==================================================== */
+        footer { background-color: var(--cor-principal); color: #ccc; padding: 50px 20px 0 20px; }
+        .footer-content { display: flex; flex-direction: column; gap: 40px; max-width: 1200px; margin: 0 auto; padding-bottom: 50px; }
+        .footer-left, .footer-right { text-align: center; }
+        .footer-info p { font-size: 1.125rem; margin: 5px 0; line-height: 1.6; }
+        .footer-info p strong { color: var(--cor-texto-claro); font-size: 1.1rem; }
+        .footer-social { display: flex; gap: 20px; justify-content: center; margin-top: 20px; }
+        .footer-social a { color: var(--cor-texto-claro); font-size: 1.8rem; }
+        .footer-social a:hover { color: var(--cor-destaque); transform: scale(1.1); }
+        .footer-right { width: 100%; min-height: 250px; }
+        .footer-bottom { border-top: 1px solid #003a61; padding: 15px 0; text-align: center; }
+        .footer-bottom p { margin: 0; font-size: 0.9rem; color: #aaa; }
+
+        /* ==================================================== */
+        /* MEDIA QUERIES (RESPONSIVO)             */
+        /* ==================================================== */
+        
+        /* --- Telas de Tablet e maiores --- */
+        @media (min-width: 768px) {
+            .nav-menu { display: flex; position: static; flex-direction: row; width: auto; background-color: transparent; }
+            .nav-menu li a:hover { background-color: transparent; color: var(--cor-destaque); }
+            .menu-toggle { display: none; }
+            
+            .steps-container { flex-direction: row; align-items: stretch; }
+            .step-card { flex-basis: 0; flex-grow: 1; flex-direction: column; align-items: center; text-align: center; }
+            .step-number { margin-right: 0; margin-bottom: 15px; }
+            
+            .why-choose-us-content { flex-direction: row; align-items: center; text-align: left; }
+            .logo-column { flex: 1; max-width: 300px; }
+            .features-column { flex: 2; }
+        }
+
+        /* --- Telas de Desktop --- */
+        @media (min-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1.5fr 1fr;
+                grid-template-areas:
+                    "title    image"
+                    "subtitle image"
+                    "button   image"
+                    ".        image";
+                text-align: left;
+                gap: 60px;
+            }
+            .hero-container .cta-button { justify-self: start; }
+            .hero-image-item { width: 100%; max-width: 450px; justify-self: end; }
+                       
+            .testimonials-container { flex-direction: row; align-items: stretch; }
+
+            .footer-content { flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 50px; }
+            .footer-left, .footer-right { text-align: left; flex: 1; }
+            .footer-social { justify-content: flex-start; }
+        }
+
+        /* ==================================================== */
+/* ANIMAÇÃO DO BOTÃO HAMBURGUER PARA "X"      */
+/* ==================================================== */
+
+.menu-toggle .bar {
+    transition: all 0.3s ease-in-out; /* Adiciona uma transição suave */
+}
+
+/* Quando o botão estiver ativo... */
+
+/* Gira a primeira barra 45 graus */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+/* Esconde a barra do meio */
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+/* Gira a terceira barra -45 graus */
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Estilos da Seção de Informações --- */
+
+.info-section {
+    display: flex;
+    justify-content: center;
+    padding: 100px 20px; /* Espaçamento vertical e margens laterais para mobile */
+    width: 100%;
+}
+
+.info-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px; /* Espaço entre os boxes */
+    width: 100%;
+    max-width: 1200px; 
+}
+
+/* =========================================
+   ESTILO DOS INFO BOXES
+   ========================================= */
+.info-box {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 39, 66, 0.07);
+    padding: 40px 30px;
+    text-align: center;
+    flex: 1; 
+    min-width: 280px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 39, 66, 0.12);
+}
+
+/* =========================================
+   ESTILO DOS ÍCONES COM FUNDO CIRCULAR
+   ========================================= */
+.icon-background {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%; /* Garante a forma de círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 25px auto; /* Centraliza e adiciona espaço abaixo */
+    transition: transform 0.4s ease;
+}
+
+.info-icon {
+    color: #ffffff;   /* Ícones brancos para contrastar com o fundo */
+    font-size: 40px;
+    margin-bottom: 0; /* Remove qualquer margem pré-existente */
+}
+
+/* --- Efeito de Hover no ícone --- */
+.info-box:hover .icon-background {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* =========================================
+   PALETA DE CORES APLICADA
+   ========================================= */
+/* Cores de fundo dos ícones */
+.icon-seguranca {
+    background-color: #d92e21; /* Vermelho */
+}
+
+.icon-agilidade {
+    background-color: #fbbe24; /* Amarelo */
+}
+
+.icon-precos {
+    background-color: #002742; /* Azul Marinho */
+}
+
+/* Cores dos textos */
+.info-box h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #002742; /* Azul Marinho para todos os títulos */
+}
+
+.info-box p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #555; /* Cinza escuro para boa legibilidade */
+}
+
+/* =========================================
+   RESPONSIVIDADE PARA SMARTPHONES
+   ========================================= */
+@media (max-width: 768px) {
+    .info-container {
+        flex-direction: column; /* Empilha os boxes verticalmente */
+        gap: 25px; /* Ajusta o espaço no mobile */
+    }
+
+    .info-section {
+        padding: 60px 20px; /* Ajusta o espaçamento vertical no mobile */
+    }
+}
+
+/* ==================================================== */
+/* BOTÃO FLUTUANTE DO WHATSAPP                      */
+/* ==================================================== */
+    .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 25px;
+        right: 25px;
+        background-color: #25D366; /* Cor oficial do WhatsApp */
+        color: #FFF;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+        background-color: #128C7E; /* Tom mais escuro do WhatsApp para hover */
+        box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+/* O container agora usa Flexbox para alinhar melhor o conteúdo */
+    .keyword-ticker-wrap {
+        width: 100%;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        padding: 15px 0;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        display: flex; /* Adicionado */
+    }
+
+    /* O elemento que se move agora também é um container flex */
+    .keyword-ticker {
+        display: flex; /* Adicionado */
+        flex-shrink: 0; /* Impede que o container encolha */
+        
+        /* A animação agora é mais inteligente */
+        animation: ticker-animation 40s linear infinite; 
+    }
+
+    /* Pausa a animação ao passar o mouse (ainda funciona) */
+    .keyword-ticker-wrap:hover .keyword-ticker {
+        animation-play-state: paused;
+    }
+
+    .keyword-item {
+        display: inline-block;
+        padding: 0 2rem;
+        font-size: 1.2rem;
+        color: #333;
+        white-space: nowrap; /* Garante que cada item não quebre linha */
+    }
+
+    /* NOVA ANIMAÇÃO: A chave da solução */
+    @keyframes ticker-animation {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            /* Move o container para a esquerda exatamente pela metade da sua largura.
+            Como o conteúdo está duplicado, isso corresponde à largura exata
+            do primeiro grupo de palavras-chave.
+            */
+            transform: translateX(-50%);
+        }
+    }
