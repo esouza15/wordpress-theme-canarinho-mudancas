@@ -6,6 +6,8 @@ Desenvolvimento e aprimoramento de um site WordPress completo para a empresa "Ca
 
 **Status do Projeto:** Concluído
 
+**[Visite o site ao vivo: mudancascanarinho.com.br/](http://mudancascanarinho.com.br/)**
+
 ## Tecnologias Utilizadas
 
 * **Linguagens:** PHP, HTML5, CSS3, JavaScript
