@@ -6,7 +6,7 @@ Desenvolvimento e aprimoramento de um site WordPress completo para a empresa "Ca
 
 **Status do Projeto:** Concluído
 
-**[Visite o site ao vivo: mudancascanarinho.com.br/](http://mudancascanarinho.com.br/)**
+**[Visite o site ao vivo: mudancascanarinho.com.br](http://mudancascanarinho.com.br/)**
 
 ## Tecnologias Utilizadas
 
